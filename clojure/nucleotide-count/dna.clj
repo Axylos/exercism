@@ -7,7 +7,7 @@
   )
     
   (def letters (seq string))
-  (clojure.core/count (filter (fn [x] (= nucleo x)) letters))
+  (or (get (frequencies string) nucleo) 0)
 
 )
 
