@@ -1,5 +1,5 @@
 (ns dna)
-
+"it counts nucleotides on a string"
 (defn dna/count [nucleo string]
 
   (if (re-matches #"([^ACGTU])" (str nucleo))
