@@ -9,7 +9,7 @@
         (subs nums 1)
 
       (do (if (not= (count nums) 10)
-        "0000000000"
+            (string/join (map (fn [x] "0") (into [] (range 10))))
         nums)))))
 
 (defn area-code [area]
