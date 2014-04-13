@@ -49,5 +49,4 @@ end
 
 
 
-p Clock.at(8).to_s
 
