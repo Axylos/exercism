@@ -1,13 +1,8 @@
 (ns word-count)
 
+(defn counter [letters]
+  (map clojure.string/lower-case (re-seq #"\w+" letters)))
+
 (defn word-count [input]
-  
-  (def ans {})
+  (frequencies (counter input)))
 
-  (def words (map clojure.string/lower-case (re-seq #"\w+" input)))
-  (frequencies words)
-  
-  
-)
-
-(word-count "one two")
