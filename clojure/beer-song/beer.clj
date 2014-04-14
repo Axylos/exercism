@@ -12,25 +12,23 @@
        "1 bottle"
        "no more bottles")))
 
-(defn line [bottles]
-  (list (firstBottle bottles) (secondBottle bottles)))
-
 (defn verse [bottles]
+  (let [bots (list (firstBottle bottles) (secondBottle bottles))]
   (str (format "%s of beer on the wall, %s of beer.\nTake %s down and pass it around, %s of beer on the wall.\n" 
-                   (first (line bottles))
-                   (first (line bottles))
+                   (first bots)
+                   (first bots)
                    (str (if (> bottles 1)
                           "one"
                           "it"))
-                   (last (line bottles)))))
+                   (last bots)))))
 
 (defn makeVerses [start stop]
   (let [vs (into [] (reverse (range stop (+ start 1))))]
   (clojure.string/join "\n" (map verse vs))))
 
 (defn sing 
-            ([start] 
-             (format"%s\nNo more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n" 
-                            (makeVerses start 1)))
-            ([start stop] (makeVerses start stop)))
+  ([start] 
+   (format"%s\nNo more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n" 
+                  (makeVerses start 1)))
+  ([start stop] (makeVerses start stop)))
 
