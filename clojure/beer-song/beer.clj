@@ -1,55 +1,36 @@
 (ns beer)
 
-(defn line [bottles]
+(defn firstBottle [bottles] 
+  (if (> bottles 1) 
+    (format "%d bottles" bottles)
+    "1 bottle"))
 
-  (def firstBottle 
-     (if (> bottles 1)
-       (format "%d bottles" bottles)
+(defn secondBottle [bottles]
+   (if (> bottles 2)
+     (format "%d bottles" (- bottles 1))
+     (if (= bottles 2)
        "1 bottle"
-     )
-  )
+       "no more bottles")))
 
-  (def bot (- bottles 1))
-  (def secondBottle
-    (if (> bot 1)
-      (format "%d bottles" bot)
-      
-      (if (= bot 1)
-        "1 bottle"
-        "no more bottles")
-    )
-    
-  )
-
-  (list (str firstBottle) (str secondBottle))
-)
+(defn line [bottles]
+  (list (firstBottle bottles) (secondBottle bottles)))
 
 (defn verse [bottles]
-  
-
-  (def bots (line bottles))
-
-  (def ver (format "%s of beer on the wall, %s of beer.\nTake %s down and pass it around, %s of beer on the wall.\n" 
-                   (first bots)
-                   (first bots)
+  (str (format "%s of beer on the wall, %s of beer.\nTake %s down and pass it around, %s of beer on the wall.\n" 
+                   (first (line bottles))
+                   (first (line bottles))
                    (str (if (> bottles 1)
                           "one"
-                          "it"
-                        ))
-                   (last bots)
-                   ))
-
-  (str ver)
-  )
+                          "it"))
+                   (last (line bottles)))))
 
 (defn makeVerses [start stop]
-  (def vs (into [] (reverse (range stop (+ start 1)))))
-  (clojure.string/join "\n" (map verse vs) )
-  )
-
+  (let [vs (into [] (reverse (range stop (+ start 1))))]
+  (clojure.string/join "\n" (map verse vs))))
 
 (defn sing 
-            ([start] (def core (makeVerses start 1))
-             (format"%s\nNo more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n" core))
+            ([start] 
+             (format"%s\nNo more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n" 
+                            (makeVerses start 1)))
             ([start stop] (makeVerses start stop)))
 
