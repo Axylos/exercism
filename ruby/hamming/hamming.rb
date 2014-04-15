@@ -1,8 +1,8 @@
 class Hamming
 
   def self.compute(a, b)
-    c = a.chars.zip b.chars
-    c.count {|elem| elem == elem.uniq && !elem.include?(nil)}
+    nucs = a.chars.zip b.chars
+    nucs.count {|(a, b)| a != b and ( a && b)}
   end
 end
 
