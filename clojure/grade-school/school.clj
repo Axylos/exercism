@@ -4,7 +4,7 @@
   (merge-with concat db { grade  [student] }))
 
 (defn grade [db grade] 
-  (or (db grade) []))
+  (db grade []))
 
 (defn sorted [db]
   (zipmap (keys db) (map sort (vals db))))
