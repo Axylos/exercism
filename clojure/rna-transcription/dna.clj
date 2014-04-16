@@ -1,4 +1,5 @@
 (ns dna)
+(use '[clojure.string :only (split join)])
 
 (defn to-rna [input]
   (let [convert (hash-map "G" "C"
@@ -6,11 +7,9 @@
                          "T" "A"
                          "A" "U")]
 
-  (let [illegal (re-find #"([^AGCT])" input)]
-  (assert (= nil illegal))
+  (assert (= nil (re-find #"([^AGCT])" input)))
 
-  (let [lets (clojure.string/split input #"")]
-  (clojure.string/join (map convert lets))))))
+  (join (map convert (split input #"")))))
 
 
 
